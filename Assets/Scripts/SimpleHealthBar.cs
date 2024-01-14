@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 
-public class SimpleHealthBar : MonoBehaviour
+public class SimpleHealthBar : Bar
 {
-    [SerializeField] private PlayerCollisionManager _playerCollisionManager;
-    [SerializeField] private PlayerHealth _playerHealth;
-
     private Image _bar;
 
     private void Awake()
@@ -17,19 +14,7 @@ public class SimpleHealthBar : MonoBehaviour
         _bar = GetComponent<Image>();
     }
 
-    private void OnEnable()
-    {
-        _playerCollisionManager.Hit += ChangeBar;
-        _playerCollisionManager.Healed += ChangeBar;
-    }
-
-    private void OnDisable()
-    {
-        _playerCollisionManager.Hit -= ChangeBar;
-        _playerCollisionManager.Healed -= ChangeBar;
-    }
-
-    private void ChangeBar(float value)
+    protected override void ChangeBar(float value)
     {
         _bar.fillAmount = (_playerHealth.Health + value) / _playerHealth.MaxHealth;
     }

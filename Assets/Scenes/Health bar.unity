@@ -206,8 +206,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1386485139}
-        m_TargetAssemblyTypeName: PlayerCollisionManager, Assembly-CSharp
+      - m_Target: {fileID: 1386485138}
+        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: HealEvent
         m_Mode: 1
         m_Arguments:
@@ -1210,8 +1210,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1386485139}
-        m_TargetAssemblyTypeName: PlayerCollisionManager, Assembly-CSharp
+      - m_Target: {fileID: 1386485138}
+        m_TargetAssemblyTypeName: PlayerHealth, Assembly-CSharp
         m_MethodName: HitEvent
         m_Mode: 1
         m_Arguments:

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerCollisionManager))]
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
 {
     private int _coins = 0;
     private PlayerCollisionManager _collisionManager;
+    public UnityAction CoinAdded;
 
     private void Awake()
     {
@@ -18,17 +20,22 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _collisionManager.CoinAdded += AddCoin;
+        CoinAdded += AddCoin;
     }
 
     private void OnDisable()
     {
-        _collisionManager.CoinAdded -= AddCoin;
+        CoinAdded -= AddCoin;
     }
 
     private void AddCoin()
     {
         _coins++;
         Debug.Log("Coins - " + _coins);
+    }
+
+    public void AddCoinEvent()
+    {
+        CoinAdded?.Invoke();
     }
 }

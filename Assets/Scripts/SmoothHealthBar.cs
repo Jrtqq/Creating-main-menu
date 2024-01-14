@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 
-public class SmoothHealthBar : MonoBehaviour
+public class SmoothHealthBar : Bar
 {
-    [SerializeField] private PlayerCollisionManager _playerCollisionManager;
-    [SerializeField] private PlayerHealth _playerHealth;
-
     private Image _bar;
     private Coroutine _currentCoroutine = null;
     private float _speed = 2f;
@@ -19,27 +16,15 @@ public class SmoothHealthBar : MonoBehaviour
         _bar = GetComponent<Image>();
     }
 
-    private void OnEnable()
-    {
-        _playerCollisionManager.Hit += StartChangingBar;
-        _playerCollisionManager.Healed += StartChangingBar;
-    }
-
-    private void OnDisable()
-    {
-        _playerCollisionManager.Hit -= StartChangingBar;
-        _playerCollisionManager.Healed -= StartChangingBar;
-    }
-
-    private void StartChangingBar(float value)
+    protected override void ChangeBar(float value)
     {
         if (_currentCoroutine != null) 
             StopCoroutine(_currentCoroutine);
 
-        _currentCoroutine = StartCoroutine(ChangeBar(value));
+        _currentCoroutine = StartCoroutine(ChangeBarCoroutine(value));
     }
 
-    private IEnumerator ChangeBar(float value)
+    private IEnumerator ChangeBarCoroutine(float value)
     {
         float target = (_playerHealth.Health + value) / _playerHealth.MaxHealth;
 

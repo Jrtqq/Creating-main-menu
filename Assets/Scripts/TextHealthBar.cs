@@ -5,11 +5,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
 
-public class TextHealthBar : MonoBehaviour
+public class TextHealthBar : Bar
 {
-    [SerializeField] private PlayerCollisionManager _playerCollisionManager;
-    [SerializeField] private PlayerHealth _playerHealth;
-
     private TMP_Text _text;
 
     private void Awake()
@@ -19,22 +16,10 @@ public class TextHealthBar : MonoBehaviour
 
     private void Start()
     {
-        ChangeText(0);
+        ChangeBar(0);
     }
 
-    private void OnEnable()
-    {
-        _playerCollisionManager.Hit += ChangeText;
-        _playerCollisionManager.Healed += ChangeText;
-    }
-
-    private void OnDisable()
-    {
-        _playerCollisionManager.Hit -= ChangeText;
-        _playerCollisionManager.Healed -= ChangeText;
-    }
-
-    private void ChangeText(float value)
+    protected override void ChangeBar(float value)
     {
         _text.text = $"{_playerHealth.Health + value}/{_playerHealth.MaxHealth}";
     }
