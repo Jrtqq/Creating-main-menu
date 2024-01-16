@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerCollisionManager))]
 
-public class Player : MonoBehaviour
+public class PlayerWallet : MonoBehaviour
 {
     private int _coins = 0;
     public UnityAction CoinAdded;

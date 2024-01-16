@@ -67,7 +67,7 @@ public class EnemyMover : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out Player _))
+        if (collision.collider.TryGetComponent(out PlayerWallet _))
         {
             _health.HitEvent();
             _animator.SetTrigger(_hitTrigger);
@@ -96,8 +96,6 @@ public class EnemyMover : MonoBehaviour
     private bool TryFindPlayer(out Transform player)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.right * transform.localScale.x, _visionRange, _playerLayerMask);
-
-        Debug.Log(hit.collider == null);
 
         if (hit.collider != null)
         {

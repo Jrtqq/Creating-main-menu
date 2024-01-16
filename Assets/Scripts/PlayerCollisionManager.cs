@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Player), typeof(Health))]
+[RequireComponent(typeof(PlayerWallet), typeof(Health))]
 
 public class PlayerCollisionManager : MonoBehaviour
 {
     private Health _playerHealth;
-    private Player _player;
+    private PlayerWallet _player;
 
     private void Awake()
     {
         _playerHealth = GetComponent<Health>();
-        _player = GetComponent<Player>();
+        _player = GetComponent<PlayerWallet>();
     }
 
     private void OnEnable()

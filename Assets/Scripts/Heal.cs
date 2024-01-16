@@ -7,7 +7,7 @@ public class Heal : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out Player _))
+        if (collision.collider.TryGetComponent(out PlayerWallet _))
         {
             Destroy(gameObject);
         }

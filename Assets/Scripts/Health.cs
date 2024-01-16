@@ -44,8 +44,12 @@ public class Health : MonoBehaviour
 
     public void HitEvent()
     {
-        ChangeHealth(-1);
-        _animator.SetTrigger(_hitTrigger);
+        int damage = -1;
+        ChangeHealth(damage);
+
+        if (_animator != null)
+            _animator.SetTrigger(_hitTrigger);
+
         Hit?.Invoke();
     }
 
@@ -53,7 +57,9 @@ public class Health : MonoBehaviour
     {
         if (CurrentHealth < MaxHealth)
         {
-            ChangeHealth(1);
+            int heal = 1;
+
+            ChangeHealth(heal);
             Healed?.Invoke();
         }
     }
