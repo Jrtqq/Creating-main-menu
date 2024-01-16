@@ -29,8 +29,6 @@ public class VampireSkill : MonoBehaviour
         if (isCasting == false)
             _time += Time.deltaTime;
 
-        Debug.Log(_time);
-
         if (Input.GetKeyDown(KeyCode.E) && _time >= _cooldown)
         {
             _coroutine = StartCoroutine(Cast());
