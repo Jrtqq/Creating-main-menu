@@ -10,7 +10,7 @@ public class EnemyMover : MonoBehaviour
     private readonly string _isChasing = "isChasing";
     private readonly string _hitTrigger = "hit";
 
-    [SerializeField] private int _playerLayerMask;
+    [SerializeField] private LayerMask _playerLayerMask;
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed = 2f;
 
