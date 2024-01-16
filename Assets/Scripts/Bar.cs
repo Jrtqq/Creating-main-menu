@@ -5,19 +5,19 @@ using UnityEngine;
 
 public abstract class Bar : MonoBehaviour
 {
-    [SerializeField] protected PlayerHealth _playerHealth;
+    [SerializeField] protected Health _health;
 
     private void OnEnable()
     {
-        _playerHealth.Hit += ChangeBar;
-        _playerHealth.Healed += ChangeBar;
+        _health.Hit += ChangeBar;
+        _health.Healed += ChangeBar;
     }
 
     private void OnDisable()
     {
-        _playerHealth.Hit -= ChangeBar;
-        _playerHealth.Healed -= ChangeBar;
+        _health.Hit -= ChangeBar;
+        _health.Healed -= ChangeBar;
     }
 
-    protected abstract void ChangeBar(float value);
+    protected abstract void ChangeBar();
 }

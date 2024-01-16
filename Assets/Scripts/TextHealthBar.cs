@@ -16,11 +16,11 @@ public class TextHealthBar : Bar
 
     private void Start()
     {
-        ChangeBar(0);
+        ChangeBar();
     }
 
-    protected override void ChangeBar(float value)
+    protected override void ChangeBar()
     {
-        _text.text = $"{_playerHealth.Health + value}/{_playerHealth.MaxHealth}";
+        _text.text = $"{_health.CurrentHealth}/{_health.MaxHealth}";
     }
 }

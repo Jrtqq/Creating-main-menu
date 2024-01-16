@@ -14,8 +14,8 @@ public class SimpleHealthBar : Bar
         _bar = GetComponent<Image>();
     }
 
-    protected override void ChangeBar(float value)
+    protected override void ChangeBar()
     {
-        _bar.fillAmount = (_playerHealth.Health + value) / _playerHealth.MaxHealth;
+        _bar.fillAmount = _health.CurrentHealth / _health.MaxHealth;
     }
 }

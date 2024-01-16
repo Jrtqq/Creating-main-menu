@@ -16,17 +16,17 @@ public class SmoothHealthBar : Bar
         _bar = GetComponent<Image>();
     }
 
-    protected override void ChangeBar(float value)
+    protected override void ChangeBar()
     {
         if (_currentCoroutine != null) 
             StopCoroutine(_currentCoroutine);
 
-        _currentCoroutine = StartCoroutine(ChangeBarCoroutine(value));
+        _currentCoroutine = StartCoroutine(ChangeBarCoroutine());
     }
 
-    private IEnumerator ChangeBarCoroutine(float value)
+    private IEnumerator ChangeBarCoroutine()
     {
-        float target = (_playerHealth.Health + value) / _playerHealth.MaxHealth;
+        float target = _health.CurrentHealth / _health.MaxHealth;
 
         while (_bar.fillAmount != target)
         {

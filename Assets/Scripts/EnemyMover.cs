@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(BoxCollider2D))]
+[RequireComponent(typeof(Animator), typeof(BoxCollider2D), typeof(Health))]
 
 public class EnemyMover : MonoBehaviour
 {
@@ -21,11 +21,23 @@ public class EnemyMover : MonoBehaviour
     private int _visionRange = 10;
     private Animator _animator;
     private BoxCollider2D _collider;
+    private Health _health;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
+        _health = GetComponent<Health>();
+    }
+
+    private void OnEnable()
+    {
+        _health.Died += Die;
+    }
+
+    private void OnDisable()
+    {
+        _health.Died -= Die;
     }
 
     private void Update()
@@ -57,14 +69,9 @@ public class EnemyMover : MonoBehaviour
     {
         if (collision.collider.TryGetComponent(out Player _))
         {
+            _health.HitEvent();
             _animator.SetTrigger(_hitTrigger);
-            _isAlive = false;
         }
-    }
-
-    public void Destroy()
-    {
-        Destroy(gameObject);
     }
 
     private void Move()
@@ -89,6 +96,8 @@ public class EnemyMover : MonoBehaviour
     private bool TryFindPlayer(out Transform player)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.right * transform.localScale.x, _visionRange, _playerLayerMask);
+
+        Debug.Log(hit.collider == null);
 
         if (hit.collider != null)
         {
@@ -116,5 +125,19 @@ public class EnemyMover : MonoBehaviour
             return - 1;
         else
             return 1;
+    }
+
+    private void Die()
+    {
+        _isAlive = false;
+        _collider.enabled = false;
+    }
+
+    public void Destroy()
+    {
+        if (_isAlive == false)
+        {
+            Destroy(gameObject);
+        }
     }
 }

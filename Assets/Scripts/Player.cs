@@ -10,13 +10,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private int _coins = 0;
-    private PlayerCollisionManager _collisionManager;
     public UnityAction CoinAdded;
-
-    private void Awake()
-    {
-        _collisionManager = GetComponent<PlayerCollisionManager>();
-    }
 
     private void OnEnable()
     {
